@@ -37,7 +37,7 @@ if(isset($_POST['location']))
 <style>
 body
 {
-    background-color:#000;
+    background-color:#333;
     color:#eee;
     min-width: 512px;
 }

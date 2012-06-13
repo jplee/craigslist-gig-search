@@ -149,10 +149,17 @@ $city = array(
 <?php
 $lines = file($address);
 
+$count = 0;
 foreach($lines as $line)
 {
-    if(ereg("<p>", $line))
+    if($count > 0) {
+        $count -= 1;
         echo $line;
+    }
+    if(ereg("<p class=\"row\">", $line)) {
+        $count = 9;
+        echo $line;
+    }
 }
 ?>
 </div> <!-- end postings -->

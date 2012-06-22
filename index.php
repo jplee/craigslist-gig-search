@@ -22,10 +22,14 @@ if(isset($_POST['location']))
     if($_POST['search'] != '')
     {
         $search = $_POST['search'];
-        $q = "'" . $search . "'";
-        $address = "http://$location.craigslist.org/search/ggg/?query=$q";
+        $q = $search;
+        $address = "http://$location.craigslist.org/search/ggg?query=$q";
     }
-    else $address = "http://$location.craigslist.org/ggg";
+    else
+    {
+        $address = "http://$location.craigslist.org/ggg";
+        $search = "gimp|photoshop|retouch|retouching|retoucher";
+    }
 }
 
 ?>
@@ -37,7 +41,7 @@ if(isset($_POST['location']))
 <style>
 body
 {
-    background-color:#333;
+    background-color:#000;
     color:#eee;
     min-width: 512px;
 }
@@ -64,28 +68,39 @@ a:visited { color: #aaa; }
 form select option
 {
     padding: 4px 8px;
+    font-size: 12px;
 }
 </style>
 
 <script language="javascript" src="js/jquery-1.6.2.min.js"></script>
-<script language="javascript" src="js/jquery.dimensions.min.js"></script>
+<script language="javascript" src="js/jquery.dimensions.pack.js"></script>
 
 <script language="javascript">
+var height = window.innerHeight - 48;
+var numrows = Math.floor(height/24);
+
 var name = "#sidemenu";
 var menuYloc = null;
 $(document).ready(function(){  
+    $('#box').attr('size', numrows)
     menuYloc = parseInt($(name).css("top").substring(0,$(name).css("top").indexOf("px")));
     $(window).scroll(function () {  
         var offset = menuYloc+$(document).scrollTop()+"px";  
         $(name).animate({top:offset},{duration:500,queue:false});  
     });  
 }); 
+$(window).resize(function() {
+    height = window.innerHeight - 48;
+    numrows = Math.floor(height/24);
+    $('#box').attr('size', numrows);
+});
 
 function checkSubmit(e)
 {
    if(e && e.keyCode == 13)
       document.forms[0].submit();
 }
+
 </script>
 </head>
 
@@ -129,14 +144,15 @@ $city = array(
     <input type="text" name="search" value="<?php echo $search ?>"
            style="background-color:#6ebae5; color:#fff; width:256px;
                   margin-right:4px;" /><br />
-    <select name="location" size="23" onclick="this.form.submit();"
+    <select id="box" name="location" size="23" onclick="this.form.submit();"
             style="background-color:#000; color:#fff; float:right;
                    border:#333 solid 1px; margin-top:11px; width:128px;">
     <?php
     foreach($city as $key=>$value)
     {
         if($value == $location)
-            echo "<option selected value='$value'>$key</option>";
+            echo "<option style='font-weight:bold; text-shadow:#000 0 0 2px;' 
+                          selected value='$value'>$key</option>";
         else
             echo "<option value='$value'>$key</option>";
     }

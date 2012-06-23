@@ -69,6 +69,7 @@ form select option
 {
     padding: 4px 8px;
     font-size: 12px;
+    text-shadow: #000 0 0 3px;
 }
 </style>
 
@@ -78,6 +79,7 @@ form select option
 <script language="javascript">
 var height = window.innerHeight - 48;
 var numrows = Math.floor(height/24);
+if(numrows > 23){ numrows = 23; }
 
 var name = "#sidemenu";
 var menuYloc = null;
@@ -92,6 +94,7 @@ $(document).ready(function(){
 $(window).resize(function() {
     height = window.innerHeight - 48;
     numrows = Math.floor(height/24);
+    if(numrows > 23){ numrows = 23; }
     $('#box').attr('size', numrows);
 });
 

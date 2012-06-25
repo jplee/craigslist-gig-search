@@ -15,7 +15,8 @@
  */
 
 $location = "sfbay";
-$address = "http://www.craigslist.org/ggg";
+$address = "http://www.craigslist.org/";
+$search = "gimp|photoshop|retouch|retouching|retoucher";
 if(isset($_POST['location']))
 {
     $location = $_POST['location'];
@@ -85,11 +86,17 @@ var name = "#sidemenu";
 var menuYloc = null;
 $(document).ready(function(){  
     $('#box').attr('size', numrows)
-    menuYloc = parseInt($(name).css("top").substring(0,$(name).css("top").indexOf("px")));
+    menuYloc = parseInt($(name).css("top").substring(0,$(name).css("top")
+                               .indexOf("px")));
     $(window).scroll(function () {  
         var offset = menuYloc+$(document).scrollTop()+"px";  
         $(name).animate({top:offset},{duration:500,queue:false});  
     });  
+
+    $("input, textarea").focus(function() {
+        // only select if the text has not changed
+        if(this.value == this.defaultValue) { this.select(); }
+    });
 }); 
 $(window).resize(function() {
     height = window.innerHeight - 48;

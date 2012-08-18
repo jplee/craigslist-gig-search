@@ -182,7 +182,7 @@ foreach($lines as $line)
         $count -= 1;
         echo $line;
     }
-    if(ereg("<p class=\"row\">", $line)) {
+    if(ereg("<p class=\"row\"*", $line)) {
         $count = 9;
         echo $line;
     }

@@ -72,6 +72,9 @@ form select option
     font-size: 12px;
     text-shadow: #000 0 0 3px;
 }
+span.i{
+    display: none;
+}
 </style>
 
 <script>

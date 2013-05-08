@@ -207,12 +207,9 @@ $lines = file($address);
 $count = 0;
 foreach($lines as $line)
 {
-    if($count > 0) {
-        $count -= 1;
-        echo $line;
-    }
     if(ereg("<p class=\"row\"*", $line)) {
-        $count = 9;
+        $line = str_replace("href=\"",
+                            "href=\"http://$location.craigslist.org", $line);
         echo $line;
     }
 }
